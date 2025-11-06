@@ -1,5 +1,44 @@
 package zabalburu.org.actividad04.modelo;
 
-public class Producto {
+import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Entity //Clase de Java que mapea una base de datos
+@Table(name = "productos")
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Producto implements Serializable{/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1402544449605063938L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private double precioUnitario;
+	private String descripcion;
+	private Integer stock;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_categoria")
+	private Categoria categoria;
+	
+	@OneToMany(mappedBy = "lineaPedido")
+	
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", precioUnitario=" + precioUnitario + ", descripcion=" + descripcion + ", stock="
+				+ stock + ", categoria=" + categoria + ", toString()=" + super.toString() + "]";
+	}
+	
 }

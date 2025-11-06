@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,11 +33,21 @@ public class Pedido implements Serializable	 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date fechaPedido;
+	private Integer numpedido;
+	private Date fechaEnvio;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_clientes")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	private List<LineaPedido> lineaPedido;
 	
-
+	
+	@OneToMany(mappedBy = "lineaPedido")
+	
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", fechaPedido=" + fechaPedido + ", numpedido=" + numpedido + ", fechaEnvio="
+				+ fechaEnvio + ", cliente=" + cliente + ", lineaPedido=" + lineaPedido + ", toString()="
+				+ super.toString() + "]";
+	}
 }
