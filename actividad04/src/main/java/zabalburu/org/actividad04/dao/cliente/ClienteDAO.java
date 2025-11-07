@@ -1,5 +1,5 @@
 package zabalburu.org.actividad04.dao.cliente;
 
-public class ClienteDAO {
+public interface ClienteDAO {
 
 }
