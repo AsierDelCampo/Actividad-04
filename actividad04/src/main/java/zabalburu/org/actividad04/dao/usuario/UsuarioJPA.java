@@ -4,6 +4,7 @@ import zabalburu.org.actividad04.modelo.Usuario;
 
 import java.util.List;
 
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -39,8 +40,21 @@ public class UsuarioJPA implements UsuarioDAO {
 
 	@Override
 	public Usuario getUsuario(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Usuario u = em.find(Usuario.class, id);
+		Query q = em.createQuery(
+		"""
+			Select u
+			From Usuario u JOIN FETCH u.pedidos
+			Where u.id = :idUsuario	
+		""");
+	
+		q.setParameter("idUsuario", id);
+		try {
+			u = (Usuario) q.getSingleResult();
+		} catch (NoResultException ex) {
+			u = null;
+		}
+		return u;
 	}
 
 }
