@@ -49,6 +49,7 @@ public class UsuarioJPA implements UsuarioDAO {
 		""");
 	
 		q.setParameter("idUsuario", id);
+		
 		try {
 			u = (Usuario) q.getSingleResult();
 		} catch (NoResultException ex) {

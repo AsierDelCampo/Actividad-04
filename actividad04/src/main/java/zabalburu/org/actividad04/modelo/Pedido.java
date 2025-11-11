@@ -35,6 +35,7 @@ public class Pedido implements Serializable	 {
 	private Date fechaPedido;
 	private Integer numpedido;
 	private Date fechaEnvio;
+	private boolean estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")

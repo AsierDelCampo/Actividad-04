@@ -37,6 +37,7 @@ public class Categoria implements Serializable{
 	private String nombre;
 			
 	@OneToMany(mappedBy = "categoria")
+	private List<Producto> productos;
 	
 	@Override
 	public String toString() {
