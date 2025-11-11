@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import zabalburu.org.actividad04.modelo.Cliente;
+import zabalburu.org.actividad04.modelo.Usuario;
 import zabalburu.org.actividad04.modelo.LineaPedido;
 
 import jakarta.persistence.Entity;
@@ -38,7 +38,7 @@ public class Pedido implements Serializable	 {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
-	private Cliente cliente;
+	private Usuario usuario;
 	private List<LineaPedido> lineaPedido;
 	
 	
@@ -47,7 +47,7 @@ public class Pedido implements Serializable	 {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", fechaPedido=" + fechaPedido + ", numpedido=" + numpedido + ", fechaEnvio="
-				+ fechaEnvio + ", cliente=" + cliente + ", lineaPedido=" + lineaPedido + ", toString()="
+				+ fechaEnvio + ", cliente=" + usuario + ", lineaPedido=" + lineaPedido + ", toString()="
 				+ super.toString() + "]";
 	}
 }

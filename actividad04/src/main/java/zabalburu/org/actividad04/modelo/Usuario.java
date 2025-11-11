@@ -18,10 +18,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity //Clase de Java que mapea una base de datos
-@Table(name ="clientes")
+@Table(name ="usuarios")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cliente implements Serializable {/**
+public class Usuario implements Serializable {/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7874616688463826542L;
@@ -32,14 +32,18 @@ public class Cliente implements Serializable {/**
 	private Integer id;
 	
 	@Column(
-			  name = "nombre_cliente",
+			  name = "nombre_usuario",
 			  columnDefinition = "varchar(100)"
 			)
 			private String nombre;
 			
 			private String apellidos;
 			
-			@OneToMany(mappedBy = "cliente")
+			private String contra;
+			
+			private boolean admin;
+			
+			@OneToMany(mappedBy = "usuario")
 			@OrderBy("fechaPedido desc")
 			private List<Pedido> pedidos;
 	
