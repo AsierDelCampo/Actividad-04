@@ -43,7 +43,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label">Contraseña</label>
-						<input type="text" class="form-control"
+						<input type="password" class="form-control"
 							id="exampleInputPassword1" name="contra" 
 							value="${param.contra}">
 					</div>

@@ -41,10 +41,12 @@ public class Usuario implements Serializable {/**
 			
 			private String contra;
 			
-			private boolean admin;
+			private Boolean admin;
 			
 			@OneToMany(mappedBy = "usuario")
 			@OrderBy("fechaPedido desc")
 			private List<Pedido> pedidos;
+			
+			
 	
 }
