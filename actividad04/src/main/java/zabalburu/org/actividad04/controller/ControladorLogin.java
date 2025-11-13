@@ -11,6 +11,7 @@ import zabalburu.org.actividad04.cdi.MensajeCDI;
 import zabalburu.org.actividad04.modelo.Producto;
 import zabalburu.org.actividad04.modelo.Usuario;
 import zabalburu.org.actividad04.service.RecyclonService;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -69,12 +70,15 @@ public class ControladorLogin extends HttpServlet {
 		} 
 		
 		Usuario log = service.login(nombre, contra);
-		
+		HttpSession sesion = request.getSession();
+		sesion.setAttribute("usuario", log);
+		/*
 		if (log.getAdmin() == true) {
 			return "admin.jsp";
 		} else {
 			return "cliente.jsp";
-		}
+		}*/
+		return "ControladorRecyclon";
 	}
 
 	/**
