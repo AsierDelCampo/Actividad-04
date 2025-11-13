@@ -59,6 +59,9 @@ public class ControladorRecyclon extends HttpServlet {
 			case "eliminar":
 				pagina = eliminarProducto(request,response);
 				break;
+			case "modificar":
+				pagina = modificarProducto(request,response);
+				break;
 	        }
 	        
 	        List<Producto> productos = service.getProducto();
@@ -73,6 +76,16 @@ public class ControladorRecyclon extends HttpServlet {
 	        
 	        request.getRequestDispatcher(pagina).forward(request, response);
 
+	}
+
+	private String modificarProducto(HttpServletRequest request, HttpServletResponse response) {
+		/*try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            service.modificarProducto(producto);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }*/
+		return "ControladorRecyclon";
 	}
 
 	private String eliminarProducto(HttpServletRequest request, HttpServletResponse response) {

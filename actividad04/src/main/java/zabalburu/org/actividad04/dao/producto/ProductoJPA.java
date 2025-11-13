@@ -53,7 +53,7 @@ public class ProductoJPA implements ProductoDAO{
 		Query q = em.createQuery(
 				"""
 				   Select p
-				   From Productos p
+				   From Producto p
 				   Order By p.id
 				   Where p.id = :id
 				"""
