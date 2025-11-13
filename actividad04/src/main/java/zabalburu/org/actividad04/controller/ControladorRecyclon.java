@@ -42,17 +42,27 @@ public class ControladorRecyclon extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina = null; 
+		String accion = request.getParameter("accion");
 		HttpSession sesion = request.getSession(false);
-		 Usuario usuario = null;
-
+		Usuario usuario = null;
 	        if (sesion == null || sesion.getAttribute("usuario") == null) {
 	            response.sendRedirect("login");
 	            return;
 	        }
-	        
 	        if (sesion != null) {
 	            usuario = (Usuario) sesion.getAttribute("usuario");
 	        }
+
+	        
+	        switch (accion.toLowerCase()) {
+			
+			case "eliminar":
+				pagina = eliminarProducto(request,response);
+				break;
+	        }
+	        
+	        List<Producto> productos = service.getProducto();
+	        request.setAttribute("productos", productos);
 	        
 	        if (usuario.getAdmin() == true) {
 	        	pagina="admin.jsp";
@@ -60,8 +70,19 @@ public class ControladorRecyclon extends HttpServlet {
 	        	pagina="cliente.jsp";
 	        }
 	        
+	        
 	        request.getRequestDispatcher(pagina).forward(request, response);
 
+	}
+
+	private String eliminarProducto(HttpServletRequest request, HttpServletResponse response) {
+		try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            service.eliminarProducto(id);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+		return "ControladorRecyclon";
 	}
 
 	/**

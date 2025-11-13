@@ -30,9 +30,10 @@ public class ProductoJPA implements ProductoDAO{
 
 	@Override
 	public void eliminarProducto(Integer id) {
-		Producto eliminar = new Producto();
-		eliminar.setId(id);
-		em.remove(eliminar);
+		 Producto eliminar = em.find(Producto.class, id);
+		    if (eliminar != null) {
+		        em.remove(eliminar);
+		    }
 	}
 
 	@Override
@@ -40,8 +41,8 @@ public class ProductoJPA implements ProductoDAO{
 		Query q = em.createQuery(
 				"""
 				   Select p
-				   From Productos p
-				   Order By p.nombre
+				   From Producto p
+				   Order By p.id
 				"""
 				);
 				return q.getResultList();
@@ -53,7 +54,7 @@ public class ProductoJPA implements ProductoDAO{
 				"""
 				   Select p
 				   From Productos p
-				   Order By p.nombre
+				   Order By p.id
 				   Where p.id = :id
 				"""
 				);
