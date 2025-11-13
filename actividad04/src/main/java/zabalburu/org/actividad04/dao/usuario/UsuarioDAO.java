@@ -1,5 +1,7 @@
 package zabalburu.org.actividad04.dao.usuario;
 
+import java.sql.SQLException;
+
 import zabalburu.org.actividad04.modelo.Usuario;
 
 public interface UsuarioDAO {

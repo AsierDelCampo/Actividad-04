@@ -4,6 +4,7 @@ import zabalburu.org.actividad04.modelo.Usuario;
 
 import java.util.List;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -22,21 +23,21 @@ public class UsuarioJPA implements UsuarioDAO {
 	private EntityManager em;
 
 	@Override
-	public Usuario login(String nombre, String password) {
-		
-		TypedQuery<Usuario> q = em.createQuery(
-				"SELECT u FROM Usuario u WHERE u.nombre = :nombre", Usuario.class);
-		q.setParameter("nombre", nombre);
-		
-		Usuario u = q.getSingleResult();
-		
-		if (u != null) {
-			if(u.getContra().equals(password)) {
-				return u;
-			}
-		}
-		return null;
-	}
+    public Usuario login(String nombre, String password) {
+        TypedQuery<Usuario> q = em.createQuery(
+            "SELECT u FROM Usuario u WHERE u.nombre = :nombre", Usuario.class);
+        q.setParameter("nombre", nombre);
+
+        List<Usuario> resultados = q.getResultList(); // nunca lanza excepción
+
+        if (!resultados.isEmpty()) {
+            Usuario u = resultados.get(0);
+            if (u.getContra().equals(password)) {
+                return u;
+            }
+        }
+        return null;
+    }
 
 	@Override
 	public Usuario getUsuario(Integer id) {
