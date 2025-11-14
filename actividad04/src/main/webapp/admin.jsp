@@ -17,12 +17,54 @@
 </head>
 <body>
 	<div class="container mt-5">
+		<div class="row d-flex justify-content-center mb-3">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<h4>Añadir Producto</h4>
+			</div>
+		</div>
+		<div class="border p-3 rounded-3 mb-3">
+			<form action="ControladorRecyclon" class="row g-3">
+			  <div class="col-md-4">
+			    <label for="validationCustom01" class="form-label">Nombre</label>
+			    <input type="text" class="form-control" id="nombre" name="nombre" required>
+			  </div>
+ 			  <div class="col-md-4"> 
+ 			    <label for="validationCustom02" class="form-label">Precio</label> 
+ 			    <input type="text" class="form-control" id="precio" name="precio" required> 
+			    
+ 			  </div> 
+			  <div class="col-md-4">
+			    <label for="validationCustomUsername" class="form-label">Categoría</label>
+			    <select class="form-select" id="categoria" name="categoria" required>
+			    	<option>Seleccione...</option>
+			      <c:forEach var="c" items="${categorias }">
+					  	<option value="${c.id }">${c.nombre}</option>
+				  </c:forEach>
+			    </select>
+			  
+			  </div>
+			  <div class="col-md-6">
+			    <label for="validationCustom03" class="form-label">Descripción</label>
+			    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+			  </div>
 		
-		<div class="row">
+<!-- 			  <div class="col-md-3"> -->
+<!-- 			    <label for="validationCustom05" class="form-label">Stock</label> -->
+<!-- 			    <input type="text" class="form-control" id="stock" name="stock" required> -->
+<!-- 			  </div> -->
+			  <div class="col-12 d-flex justify-content-center">
+			       <button type="submit" class="btn btn-primary" name="accion" value="nuevo">Añadir Producto</button>
+			  </div>
+			</form>
+		</div>
+		<div class="row d-flex justify-content-center">
 			<div class="col-3"></div>
 			<div class="col-6">
 				<h4>Catálogo</h4>
 			</div>
+		</div>
+		
 		</div>
 		<c:if test="${empty productos }">
 			<div class="row">
@@ -42,6 +84,7 @@
 								<th scope="col">#</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Descripcion</th>
+								<th scope="col">Categoría</th>
 								<th scope="col">Precio</th>
 								<th scope="col">Stock</th>
 								<th></th>								
@@ -53,6 +96,7 @@
 									<th scope="row">${p.id }</th>
 									<td>${ p.nombre }</td>
 									<td>${ p.descripcion }</td>
+									<td>${ p.categoria.nombre }</td>
 									<td><fmt:formatNumber value="${p.precioUnitario}" type="currency" currencySymbol="€"/></td>
 									<td>${ p.stock }</td>
 									<td><a href="ControladorRecyclon?accion=modificar&id=${p.id}">Modificar</a></td>

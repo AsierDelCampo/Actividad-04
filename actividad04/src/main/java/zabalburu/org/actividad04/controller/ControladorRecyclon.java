@@ -1,5 +1,9 @@
 package zabalburu.org.actividad04.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
+
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,19 +12,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import zabalburu.org.actividad04.cdi.MensajeCDI;
+import zabalburu.org.actividad04.modelo.Categoria;
 import zabalburu.org.actividad04.modelo.Producto;
 import zabalburu.org.actividad04.modelo.Usuario;
 import zabalburu.org.actividad04.service.RecyclonService;
-
-import java.io.IOException;
-import java.util.List;
-
 
 /**
  * Servlet implementation class ControladorRecyclon
  */
 @WebServlet("/ControladorRecyclon")
 public class ControladorRecyclon extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
@@ -62,10 +64,18 @@ public class ControladorRecyclon extends HttpServlet {
 			case "modificar":
 				pagina = modificarProducto(request,response);
 				break;
+			case "nuevo":
+				pagina = nuevoProducto(request,response);
+				break;
 	        }
 	        
+	        //Lista Productos
 	        List<Producto> productos = service.getProducto();
 	        request.setAttribute("productos", productos);
+	        
+	        //Lista Categoría
+	        List<Categoria> categorias = service.getListaCategorias();
+	        request.setAttribute("categorias", categorias);
 	        
 	        if (usuario.getAdmin() == true) {
 	        	pagina="admin.jsp";
@@ -76,6 +86,39 @@ public class ControladorRecyclon extends HttpServlet {
 	        
 	        request.getRequestDispatcher(pagina).forward(request, response);
 
+	}
+
+	private String nuevoProducto(HttpServletRequest request, HttpServletResponse response) {
+
+		Producto p = new Producto();
+		Categoria c = (Categoria) request.getAttribute("categoria");
+		Integer idCategoria = c.getId();
+		c = service.getCategoria(idCategoria);
+		
+		Double precio = 0.0;
+		String precioStr = request.getParameter("precio");
+
+		if (precioStr != null && !precioStr.trim().isEmpty()) {
+		    try {
+		        precio = Double.parseDouble(precioStr.trim());
+		    } catch (NumberFormatException e) {
+		        e.printStackTrace();
+		        // manejar error, dejar precio = 0.0 o mostrar mensaje
+		    }
+		} else {
+		    // manejar el caso donde no se envió el precio
+		    System.out.println("Precio no recibido desde el formulario.");
+		}
+		
+		p.setNombre(request.getParameter("nombre"));
+		p.setPrecioUnitario(precio);
+		p.setCategoria(c);
+		p.setDescripcion(request.getParameter("descripcion"));
+		//p.setStock(Integer.parseInt(request.getParameter("stock")));
+		
+		service.nuevoProducto(p);
+		
+		return "ControladorRecyclon";
 	}
 
 	private String modificarProducto(HttpServletRequest request, HttpServletResponse response) {

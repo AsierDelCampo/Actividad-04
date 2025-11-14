@@ -34,7 +34,6 @@ public class Pedido implements Serializable	 {
 	private Integer id;
 	private Date fechaPedido;
 	private Integer numpedido;
-	private Date fechaEnvio;
 	private boolean estado;
 	
 	@ManyToOne
@@ -48,7 +47,7 @@ public class Pedido implements Serializable	 {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", fechaPedido=" + fechaPedido + ", numpedido=" + numpedido + ", fechaEnvio="
-				+ fechaEnvio + ", cliente=" + usuario + ", lineaPedido=" + lineaPedido + ", toString()="
+				+ ", cliente=" + usuario + ", lineaPedido=" + lineaPedido + ", toString()="
 				+ super.toString() + "]";
 	}
 }

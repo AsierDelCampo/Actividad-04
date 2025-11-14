@@ -2,6 +2,7 @@ package zabalburu.org.actividad04.dao.producto;
 
 import java.util.List;
 
+import zabalburu.org.actividad04.modelo.LineaPedido;
 import zabalburu.org.actividad04.modelo.Producto;
 
 public interface ProductoDAO {
