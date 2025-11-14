@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div class="border p-3 rounded-3 mb-3">
-			<form action="ControladorRecyclon" class="row g-3">
+			<form action="ControladorRecyclon" class="row g-3" method="get">
 			  <div class="col-md-4">
 			    <label for="validationCustom01" class="form-label">Nombre</label>
 			    <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -49,10 +49,10 @@
 			    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
 			  </div>
 		
-<!-- 			  <div class="col-md-3"> -->
-<!-- 			    <label for="validationCustom05" class="form-label">Stock</label> -->
-<!-- 			    <input type="text" class="form-control" id="stock" name="stock" required> -->
-<!-- 			  </div> -->
+			  <div class="col-md-3"> 
+ 			    <label for="validationCustom05" class="form-label">Stock</label> 
+ 			    <input type="text" class="form-control" id="stock" name="stock" required> 
+ 			  </div> 
 			  <div class="col-12 d-flex justify-content-center">
 			       <button type="submit" class="btn btn-primary" name="accion" value="nuevo">Añadir Producto</button>
 			  </div>

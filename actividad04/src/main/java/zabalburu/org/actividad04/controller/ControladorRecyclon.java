@@ -47,7 +47,7 @@ public class ControladorRecyclon extends HttpServlet {
 		String accion = request.getParameter("accion");
 		HttpSession sesion = request.getSession(false);
 		Usuario usuario = null;
-	        if (sesion == null || sesion.getAttribute("usuario") == null) {
+	        if (sesion == null || sesion.getAttribute("usuario") == null ||accion == null) {
 	            response.sendRedirect("login");
 	            return;
 	        }
@@ -91,30 +91,44 @@ public class ControladorRecyclon extends HttpServlet {
 	private String nuevoProducto(HttpServletRequest request, HttpServletResponse response) {
 
 		Producto p = new Producto();
-		Categoria c = (Categoria) request.getAttribute("categoria");
-		Integer idCategoria = c.getId();
-		c = service.getCategoria(idCategoria);
+		
+		String categoriaParam = request.getParameter("categoria");
+		Integer idCategoria = Integer.parseInt(categoriaParam);
+	    Categoria c = service.getCategoria(idCategoria);
+	    p.setCategoria(c);
 		
 		Double precio = 0.0;
 		String precioStr = request.getParameter("precio");
+		
+		Integer stock = 0;
+		String stockStr = request.getParameter("stock");
 
 		if (precioStr != null && !precioStr.trim().isEmpty()) {
 		    try {
 		        precio = Double.parseDouble(precioStr.trim());
 		    } catch (NumberFormatException e) {
 		        e.printStackTrace();
-		        // manejar error, dejar precio = 0.0 o mostrar mensaje
+		        
 		    }
 		} else {
-		    // manejar el caso donde no se envió el precio
-		    System.out.println("Precio no recibido desde el formulario.");
+		    
+		}
+		
+		if (stockStr != null && !stockStr.trim().isEmpty()) {
+		    try {
+		        stock = Integer.parseInt(stockStr.trim());
+		    } catch (NumberFormatException e) {
+		        e.printStackTrace();
+		        
+		    }
+		} else {
+		    
 		}
 		
 		p.setNombre(request.getParameter("nombre"));
 		p.setPrecioUnitario(precio);
-		p.setCategoria(c);
 		p.setDescripcion(request.getParameter("descripcion"));
-		//p.setStock(Integer.parseInt(request.getParameter("stock")));
+		p.setStock(stock);
 		
 		service.nuevoProducto(p);
 		

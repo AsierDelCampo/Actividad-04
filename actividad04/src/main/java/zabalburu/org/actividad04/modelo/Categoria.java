@@ -1,6 +1,7 @@
 package zabalburu.org.actividad04.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -37,7 +38,7 @@ public class Categoria implements Serializable{
 	private String nombre;
 			
 	@OneToMany(mappedBy = "categoria")
-	private List<Producto> productos;
+	private List<Producto> productos = new ArrayList<>();
 	
 	@Override
 	public String toString() {
