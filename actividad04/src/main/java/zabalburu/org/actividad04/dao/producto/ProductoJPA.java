@@ -56,12 +56,12 @@ public class ProductoJPA implements ProductoDAO{
 				"""
 				   Select p
 				   From Producto p
+				   Where p.categoria.id = :idCat
 				   Order By p.id
-				   Where p.id = :id
 				"""
 				);
 		
-		q.setParameter("id", id);
+		q.setParameter("idCat", id);
 		return q.getResultList();
 				
 	}

@@ -67,6 +67,9 @@ public class ControladorRecyclon extends HttpServlet {
 			case "nuevo":
 				pagina = nuevoProducto(request,response);
 				break;
+			case "cat":
+				pagina = filtrarProducto(request,response);
+				break;
 	        }
 	        
 	        
@@ -79,6 +82,8 @@ public class ControladorRecyclon extends HttpServlet {
 	        List<Categoria> categorias = service.getListaCategorias();
 	        request.setAttribute("categorias", categorias);
 	        
+
+	        
 	        
 	        if (usuario.getAdmin() == true) {
 	        	pagina="admin.jsp";
@@ -86,9 +91,20 @@ public class ControladorRecyclon extends HttpServlet {
 	        	pagina="cliente.jsp";
 	        }
 	        
+	        if(pagina=="admin.jsp") {
+		      
+	        }
 	        
 	        request.getRequestDispatcher(pagina).forward(request, response);
 
+	}
+
+	private String filtrarProducto(HttpServletRequest request, HttpServletResponse response) {
+		  String idCatStr = request.getParameter("cat");
+	      Integer idCat = Integer.parseInt(idCatStr);
+	      List<Producto> productosCat = service.getProductoCat(idCat);
+	      request.setAttribute("productoscat", productosCat);
+	  	  return "cliente.jsp";
 	}
 
 	private String nuevoProducto(HttpServletRequest request, HttpServletResponse response) {

@@ -35,9 +35,10 @@
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6">
-				<form action="citas">
+				<form action="ControladorRecyclon" method="get">
+				  <input type="hidden" name="accion" value="cat" />
 				  <div class="mb-3">
-				    <select class="form-select" aria-label="Seleccionar categoria" name="cat">
+				    <select class="form-select" name="cat" id="cat" onchange="this.form.submit()">
 					  <c:forEach var="c" items="${categorias }">
 					  	<option value="${c.id }">${c.nombre }</option>
 					  </c:forEach>
@@ -81,7 +82,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="p" items="${productos}">
+							<c:forEach var="p" items="${productoscat}">
 								<tr>
 									<th scope="row">${p.id }</th>
 									<td>${ p.nombre }</td>
