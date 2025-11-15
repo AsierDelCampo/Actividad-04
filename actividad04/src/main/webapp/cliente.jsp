@@ -40,7 +40,8 @@
 				  <div class="mb-3">
 				    <select class="form-select" name="cat" id="cat" onchange="this.form.submit()">
 					  <c:forEach var="c" items="${categorias }">
-					  	<option value="${c.id }">${c.nombre }</option>
+					  	<option value="${c.id }"
+					  	<c:if test="${param.cat == c.id}">selected="selected"</c:if>>${c.nombre }</option>
 					  </c:forEach>
 					</select>
 				  </div>
