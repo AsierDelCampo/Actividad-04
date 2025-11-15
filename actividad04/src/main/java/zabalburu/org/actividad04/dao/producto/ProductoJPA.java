@@ -68,18 +68,17 @@ public class ProductoJPA implements ProductoDAO{
 
 	@Override
 	public Producto getProductoId(Integer id) {
-		Producto p = em.find(Producto.class, id);
-		Query q = em.createQuery(
-		"""
-			Select p
-			From Producto p JOIN FETCH p.categoria
-			Where p.id = :idProducto
-		""");
-	
-		q.setParameter("idProducto", id);
-		
+		Producto p = null;
 		try {
-			p = (Producto) q.getSingleResult();
+			Query q = em.createQuery(
+				"""
+					Select p
+					From Producto p LEFT JOIN FETCH p.categoria
+					Where p.id = :idProducto
+				""");
+			
+				q.setParameter("idProducto", id);
+				p = (Producto) q.getSingleResult();
 		} catch (NoResultException ex) {
 			p = null;
 		}

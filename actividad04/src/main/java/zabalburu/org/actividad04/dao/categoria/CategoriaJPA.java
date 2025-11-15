@@ -33,20 +33,19 @@ public class CategoriaJPA implements CategoriaDAO{
 
 	@Override
 	public Categoria getCategoria(Integer id) {
-		Categoria c = em.find(Categoria.class, id);
+		Categoria c = null;
+		try {
 		Query q = em.createQuery(
 		"""
 			Select c
-			From Categoria c JOIN FETCH c.productos
+			From Categoria c LEFT JOIN FETCH c.productos
 			Where c.id = :idCategoria
 		""");
 	
-		q.setParameter("idCategoria", id);
-		
-		try {
+			q.setParameter("idCategoria", id);
 			c = (Categoria) q.getSingleResult();
 		} catch (NoResultException ex) {
-			c = null;
+			
 		}
 		return c;
 	}
