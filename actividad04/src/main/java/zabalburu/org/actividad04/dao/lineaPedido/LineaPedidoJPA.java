@@ -57,8 +57,4 @@ public class LineaPedidoJPA implements LineaPedidoDAO {
 		lp.getPedido().getLineaPedido().remove(lp);
 	}
 
-	
-	
-	
-
 }

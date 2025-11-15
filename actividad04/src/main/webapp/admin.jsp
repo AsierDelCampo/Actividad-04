@@ -17,6 +17,10 @@
 </head>
 <body>
 	<div class="container mt-5">
+	
+		<div class="row">
+			<h2>Administradores <a href="login" class="btn btn-info">Volver</a></h2>
+		</div>
 		<div class="row d-flex justify-content-center mb-3">
 			<div class="col-3"></div>
 			<div class="col-6">
@@ -117,6 +121,7 @@
 		</div>
 		
 		</div>
+		<div>
 		<c:if test="${empty productos }">
 			<div class="row">
 				<div class="col-3"></div>

@@ -80,7 +80,7 @@ public class ProductoJPA implements ProductoDAO{
 				q.setParameter("idProducto", id);
 				p = (Producto) q.getSingleResult();
 		} catch (NoResultException ex) {
-			p = null;
+			
 		}
 		return p;
 	}

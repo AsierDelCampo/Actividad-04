@@ -77,6 +77,14 @@ public class ControladorRecyclon extends HttpServlet {
 	        List<Categoria> categorias = service.getListaCategorias();
 	        request.setAttribute("categorias", categorias);
 	        
+	        //Lista Prodocto Categoria por ID
+	        String idProductoCatStr = request.getParameter("cat");
+	        Integer idProductoCat = Integer.parseInt(idProductoCatStr);
+	        
+	        List<Producto> productosCategoria = service.getProductoCat(idProductoCat);
+	        request.setAttribute("productos", productos);
+	        
+	        
 	        if (usuario.getAdmin() == true) {
 	        	pagina="admin.jsp";
 	        }else {
