@@ -52,6 +52,10 @@ public class RecyclonService {
 		return productoDAO.getProductoCat(id);
 	}
 	
+	public Producto getProductoId(Integer id) {
+		return productoDAO.getProductoId(id);
+	}
+	
 	
 	
 	@Inject

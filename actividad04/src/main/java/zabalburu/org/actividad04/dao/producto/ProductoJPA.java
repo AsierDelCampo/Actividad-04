@@ -4,10 +4,12 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import zabalburu.org.actividad04.modelo.Producto;
+import zabalburu.org.actividad04.modelo.Usuario;
 
 @ApplicationScoped
 @Transactional
@@ -62,6 +64,26 @@ public class ProductoJPA implements ProductoDAO{
 		q.setParameter("id", id);
 		return q.getResultList();
 				
+	}
+
+	@Override
+	public Producto getProductoId(Integer id) {
+		Producto p = em.find(Producto.class, id);
+		Query q = em.createQuery(
+		"""
+			Select p
+			From Producto p JOIN FETCH p.categoria
+			Where p.id = :idProducto
+		""");
+	
+		q.setParameter("idProducto", id);
+		
+		try {
+			p = (Producto) q.getSingleResult();
+		} catch (NoResultException ex) {
+			p = null;
+		}
+		return p;
 	}
 	
 }

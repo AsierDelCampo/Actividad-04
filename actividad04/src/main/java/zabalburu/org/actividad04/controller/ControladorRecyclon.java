@@ -136,12 +136,51 @@ public class ControladorRecyclon extends HttpServlet {
 	}
 
 	private String modificarProducto(HttpServletRequest request, HttpServletResponse response) {
-		/*try {
-            Integer id = Integer.parseInt(request.getParameter("id"));
-            service.modificarProducto(producto);
-        } catch (Exception e) {
-            e.printStackTrace(); 
-        }*/
+		
+		
+		String productoParam = request.getParameter("id");
+		Integer idProducto = Integer.parseInt(productoParam);
+		Producto p = service.getProductoId(idProducto);
+
+		String categoriaParam = request.getParameter("categoria");
+		Integer idCategoria = Integer.parseInt(categoriaParam);
+	    Categoria c = service.getCategoria(idCategoria);
+	    p.setCategoria(c);
+		
+		Double precio = 0.0;
+		String precioStr = request.getParameter("precio");
+		
+		Integer stock = 0;
+		String stockStr = request.getParameter("stock");
+
+		if (precioStr != null && !precioStr.trim().isEmpty()) {
+		    try {
+		        precio = Double.parseDouble(precioStr.trim());
+		    } catch (NumberFormatException e) {
+		        e.printStackTrace();
+		        
+		    }
+		} else {
+		    
+		}
+		
+		if (stockStr != null && !stockStr.trim().isEmpty()) {
+		    try {
+		        stock = Integer.parseInt(stockStr.trim());
+		    } catch (NumberFormatException e) {
+		        e.printStackTrace();
+		        
+		    }
+		} else {
+		    
+		}
+		
+		p.setNombre(request.getParameter("nombre"));
+		p.setPrecioUnitario(precio);
+		p.setDescripcion(request.getParameter("descripcion"));
+		p.setStock(stock);
+		
+		service.modificarProducto(p);
 		return "ControladorRecyclon";
 	}
 
