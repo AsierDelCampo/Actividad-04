@@ -16,7 +16,7 @@
 <body>
 
 	<div class="row text-center">
-		<h2>Cliente : ${u.nombre }, ${u.apellidos}  <a href="login" class="btn btn-info">Volver</a></h2>
+		<h2>Cliente : ${usuario.nombre } ${usuario.apellidos}  <a href="login" class="btn btn-info">Volver</a></h2>
 	</div>
 	<c:if test="${! empty mensajeCDI }">
 		<div class="row">
@@ -38,8 +38,8 @@
 				<form action="citas">
 				  <div class="mb-3">
 				    <select class="form-select" aria-label="Seleccionar categoria" name="cat">
-					  <c:forEach var="p" items="${categorias }">
-					  	<option value="${p.id }">${p.apellidos }, ${p.nombre }</option>
+					  <c:forEach var="c" items="${categorias }">
+					  	<option value="${c.id }">${c.nombre }</option>
 					  </c:forEach>
 					</select>
 				  </div>
