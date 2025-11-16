@@ -67,7 +67,7 @@ public class ControladorRecyclon extends HttpServlet {
 			case "nuevo":
 				pagina = nuevoProducto(request,response);
 				break;
-			case "cat":
+			case "filtrar":
 				pagina = filtrarProducto(request,response);
 				break;
 	        }
@@ -81,14 +81,22 @@ public class ControladorRecyclon extends HttpServlet {
 	        //Lista Categoría
 	        List<Categoria> categorias = service.getListaCategorias();
 	        request.setAttribute("categorias", categorias);
-	        
+	       
 
+	        
 	        
 	        
 	        if (usuario.getAdmin() == true) {
 	        	pagina="admin.jsp";
 	        }else {
 	        	pagina="cliente.jsp";
+	        	if ("filtrar".equals(accion)) {
+		            filtrarProducto(request, response);
+		        } else {
+		            // carga por defecto todos los productos
+		            productos = service.getProducto();
+		            request.setAttribute("productoscat", productos);
+		        }
 	        }
 	        
 	        if(pagina=="admin.jsp") {
@@ -101,9 +109,15 @@ public class ControladorRecyclon extends HttpServlet {
 
 	private String filtrarProducto(HttpServletRequest request, HttpServletResponse response) {
 		  String idCatStr = request.getParameter("cat");
-	      Integer idCat = Integer.parseInt(idCatStr);
-	      List<Producto> productosCat = service.getProductoCat(idCat);
-	      request.setAttribute("productoscat", productosCat);
+		  
+		  if (idCatStr == null || idCatStr.isEmpty()) {
+			 List<Producto> productos = service.getProducto();
+			 request.setAttribute("productoscat", productos);
+		}else {
+		     Integer idCat = Integer.parseInt(idCatStr);
+		     List<Producto> productosCat = service.getProductoCat(idCat);
+		     request.setAttribute("productoscat", productosCat);
+		}
 	  	  return "cliente.jsp";
 	}
 

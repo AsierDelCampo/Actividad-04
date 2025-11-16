@@ -6,110 +6,96 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <title>Cliente</title>
+
+<style>
+    body { background: #f5f6fa; font-family: 'Segoe UI', sans-serif; }
+    .card-product {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .card-product:hover { transform: scale(1.02); }
+    .product-img {
+        border-radius: 20px 20px 0 0;
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+</style>
+
 </head>
+
 <body>
 
-	<div class="row text-center">
-		<h2>Cliente : ${usuario.nombre } ${usuario.apellidos}  <a href="login" class="btn btn-info">Volver</a></h2>
-	</div>
-	<c:if test="${! empty mensajeCDI }">
-		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
-				<div class="${mensajeCDI.role }">${mensajeCDI.message }</div>
-			</div>
-		</div>
-		</c:if>
-			<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
-				<h4>Categorías</h4>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
-				<form action="ControladorRecyclon" method="get">
-				  <input type="hidden" name="accion" value="cat" />
-				  <div class="mb-3">
-				    <select class="form-select" name="cat" id="cat" onchange="this.form.submit()">
-					  <c:forEach var="c" items="${categorias }">
-					  	<option value="${c.id }"
-					  	<c:if test="${param.cat == c.id}">selected="selected"</c:if>>${c.nombre }</option>
-					  </c:forEach>
-					</select>
-				  </div>
-				</form>
-			</div>
-		</div>
-	
-	<div class="row d-flex justify-content-center">
-			<div class="col-3"></div>
-			<div class="col-6">
-				<h4>Catálogo</h4>
-			</div>
-		</div>
-		
-		</div>
-		<div>
-		<c:if test="${empty productos }">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6">
-					<div class="alert alert-info">No hay productos</div>
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${!empty productos }">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Categoría</th>
-								<th scope="col">Precio</th>
-								<!-- <th scope="col">Stock</th> -->
-								<th></th>								
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="p" items="${productoscat}">
-								<tr>
-									<th scope="row">${p.id }</th>
-									<td>${ p.nombre }</td>
-									<td>${ p.descripcion }</td>
-									<td>${ p.categoria.nombre }</td>
-									<td><fmt:formatNumber value="${p.precioUnitario}" type="currency" currencySymbol="€"/></td>
-									<!--  <td>${ p.stock }</td>-->
-									<td><a href="ControladorRecyclon?accion=modificar&id=${p.id}">Comprar</a></td>
-								
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</c:if>
-	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+    <nav class="navbar navbar-light bg-white shadow-sm mb-4 p-3">
+        <div class="container-fluid">
+            <h3 class="fw-bold">Hola, ${usuario.nombre } ${usuario.apellidos}</h3>
+            <a href="login" class="btn btn-outline-primary">Volver</a>
+        </div>
+    </nav>
 
-	 
-	<!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+    <div class="container">
+
+        <!-- Categorías -->
+        <div class="card shadow-sm p-4 mb-4">
+            <h4 class="mb-3 text-primary">Categorías</h4>
+
+            <form action="ControladorRecyclon" method="get">
+                <input type="hidden" name="accion" value="filtrar">
+                <select class="form-select" name="cat" id="cat" onchange="this.form.submit()">
+                    <option value="">Seleccione...</option>
+                    <c:forEach var="c" items="${categorias}">
+                        <option value="${c.id}"
+                          <c:if test="${param.cat == c.id}">selected="selected"</c:if>>
+                          ${c.nombre}
+                        </option>
+                    </c:forEach>
+                </select>
+            </form>
+        </div>
+
+        <!-- Catálogo -->
+        <c:if test="${not empty productoscat}">
+        <h4 class="text-primary mb-3">Catálogo</h4>
+
+        <c:if test="${empty productos}">
+            <div class="alert alert-info text-center">No hay productos</div>
+        </c:if>
+
+        <div class="row g-4">
+        <c:forEach var="p" items="${productoscat}">
+            <div class="col-md-4">
+                <div class="card card-product">
+
+<%--                     <img src="<c:out value='${p.foto}'/>" --%>
+<!--                          onerror="this.src='https://via.placeholder.com/300x200?text=Sin+Foto'" -->
+<!--                          class="product-img" alt="img/productos/"> -->
+
+                    <div class="card-body">
+                        <h5 class="fw-bold">${p.nombre}</h5>
+                        <p class="text-muted">${p.descripcion}</p>
+                        <p class="fw-semibold">Categoría: ${p.categoria.nombre}</p>
+                        <p class="text-success fw-bold">
+                            <fmt:formatNumber value="${p.precioUnitario}" type="currency" currencySymbol="€"/>
+                        </p>
+                        <a href="ControladorRecyclon?accion=modificar&id=${p.id}" class="btn btn-primary w-100">
+                            Comprar
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </c:forEach>
+        </div>
+	</c:if>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
