@@ -1,7 +1,9 @@
 package zabalburu.org.actividad04.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.inject.Inject;
@@ -13,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import zabalburu.org.actividad04.cdi.MensajeCDI;
 import zabalburu.org.actividad04.modelo.Categoria;
+import zabalburu.org.actividad04.modelo.Pedido;
 import zabalburu.org.actividad04.modelo.Producto;
 import zabalburu.org.actividad04.modelo.Usuario;
 import zabalburu.org.actividad04.service.RecyclonService;
@@ -24,6 +27,7 @@ import zabalburu.org.actividad04.service.RecyclonService;
 public class ControladorRecyclon extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private final static DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 	
 	@Inject
 	private RecyclonService service;
@@ -70,6 +74,9 @@ public class ControladorRecyclon extends HttpServlet {
 			case "filtrar":
 				pagina = filtrarProducto(request,response);
 				break;
+			case "comprar":
+				pagina = comprarProducto(request,response);
+				break;
 	        }
 	        
 	        
@@ -82,6 +89,9 @@ public class ControladorRecyclon extends HttpServlet {
 	        List<Categoria> categorias = service.getListaCategorias();
 	        request.setAttribute("categorias", categorias);
 	       
+	      //Lista Productos
+	        List<Producto> stockBajo = service.getNivelStock();
+	        request.setAttribute("stockbajo", stockBajo);
 
 	        
 	        
@@ -96,6 +106,7 @@ public class ControladorRecyclon extends HttpServlet {
 		            // carga por defecto todos los productos
 		            productos = service.getProducto();
 		            request.setAttribute("productoscat", productos);
+		            
 		        }
 	        }
 	        
@@ -105,6 +116,26 @@ public class ControladorRecyclon extends HttpServlet {
 	        
 	        request.getRequestDispatcher(pagina).forward(request, response);
 
+	}
+
+	private String comprarProducto(HttpServletRequest request, HttpServletResponse response) { // nadie en su sano juicio hace funcionar este metodo!!!!!!!!
+		Pedido  p = new Pedido();
+		
+		HttpSession sesion = request.getSession();
+		Usuario u = (Usuario) sesion.getAttribute("usuario");
+		p.setUsuario(u);
+		
+		Date ahora = new Date();
+		request.setAttribute("ahora", df.format(ahora));
+		p.setFechaPedido(ahora);
+		p.setEstado("Enviado");
+		
+		
+		
+		
+		
+		
+		return "ControladorRecyclon";
 	}
 
 	private String filtrarProducto(HttpServletRequest request, HttpServletResponse response) {
@@ -152,7 +183,6 @@ public class ControladorRecyclon extends HttpServlet {
 		        stock = Integer.parseInt(stockStr.trim());
 		    } catch (NumberFormatException e) {
 		        e.printStackTrace();
-		        
 		    }
 		} else {
 		    

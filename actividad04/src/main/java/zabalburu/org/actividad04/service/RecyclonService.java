@@ -56,6 +56,9 @@ public class RecyclonService {
 		return productoDAO.getProductoId(id);
 	}
 	
+	public List<Producto> getNivelStock() {
+		return productoDAO.getNivelStock();
+	}
 	
 	
 	@Inject

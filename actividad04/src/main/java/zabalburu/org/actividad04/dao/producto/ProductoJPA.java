@@ -84,5 +84,18 @@ public class ProductoJPA implements ProductoDAO{
 		}
 		return p;
 	}
+
+	@Override
+	public List<Producto> getNivelStock() {
+		
+		Query q = em.createQuery(
+			"""
+				Select p
+				From Producto p 
+				Where p.stock <= 10
+			""");
+		
+		return q.getResultList();
+	}
 	
 }

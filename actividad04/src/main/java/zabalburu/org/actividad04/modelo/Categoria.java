@@ -38,7 +38,7 @@ public class Categoria implements Serializable{
 	private String nombre;
 			
 	@OneToMany(mappedBy = "categoria")
-	private List<Producto> productos = new ArrayList<>();
+	private List<Producto> productos; // = new ArrayList<>(); ???????????????????????????????? como pelotas funciona con y sin el
 	
 	@Override
 	public String toString() {

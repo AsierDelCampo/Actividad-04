@@ -169,7 +169,45 @@
             </div>
         </div>
     </div>
+	<div class="card card-custom p-4 mb-4">
+		<h4 class="text-primary mb-3">Stock Bajo <span class="badge bg-secondary">Stock inferior a 10</span> </h4>
+             
+    <c:if test="${empty stockbajo}">
+        <div class="alert alert-info text-center">No hay productos con stock bajo</div>
+    </c:if>
 
+    <c:if test="${!empty stockbajo}">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th></th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="p" items="${stockbajo}">
+                    <tr>
+                        <td>${p.id}</td>
+                        <td>${p.nombre}</td>
+                        <td>${p.descripcion}</td>
+                        <td>${p.categoria.nombre}</td>
+                        <td>
+                            <fmt:formatNumber value="${p.precioUnitario}" type="currency" currencySymbol="€"/>
+                        </td>
+                        <td>${p.stock}</td>
+                    </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
+	</div>
 
     <!-- Catálogo -->
     <div class="card card-custom p-4">

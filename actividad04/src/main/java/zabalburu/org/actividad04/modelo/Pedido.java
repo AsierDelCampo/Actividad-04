@@ -33,8 +33,7 @@ public class Pedido implements Serializable	 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date fechaPedido;
-	private Integer numpedido;
-	private boolean estado;
+	private String estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
@@ -46,7 +45,7 @@ public class Pedido implements Serializable	 {
 	
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", fechaPedido=" + fechaPedido + ", numpedido=" + numpedido + ", fechaEnvio="
+		return "Pedido [id=" + id + ", fechaPedido=" + fechaPedido + ", numpedido=" + ", fechaEnvio="
 				+ ", cliente=" + usuario + ", lineaPedido=" + lineaPedido + ", toString()="
 				+ super.toString() + "]";
 	}

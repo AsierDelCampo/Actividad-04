@@ -44,6 +44,7 @@
         <!-- Categorías -->
         <div class="card shadow-sm p-4 mb-4">
             <h4 class="mb-3 text-primary">Categorías</h4>
+
             <form action="ControladorRecyclon" method="get">
                 <input type="hidden" name="accion" value="filtrar">
                 <select class="form-select" name="cat" id="cat" onchange="this.form.submit()">
@@ -55,19 +56,16 @@
                         </option>
                     </c:forEach>
                 </select>
-                
             </form>
         </div>
 
         <!-- Catálogo -->
-        <c:if test="${empty productoscat}">
-            <div class="alert alert-info text-center">No hay productos de esta categoría</div>
-        </c:if>
-        
         <c:if test="${not empty productoscat}">
-        	<h4 class="text-primary mb-3">Catálogo</h4>
-		</c:if>
-        
+        <h4 class="text-primary mb-3">Catálogo</h4>
+
+        <c:if test="${empty productos}">
+            <div class="alert alert-info text-center">No hay productos</div>
+        </c:if>
 
         <div class="row g-4">
         <c:forEach var="p" items="${productoscat}">
@@ -82,20 +80,14 @@
                         <h5 class="fw-bold">${p.nombre}</h5>
                         <p class="text-muted">${p.descripcion}</p>
                         <p class="fw-semibold">Categoría: ${p.categoria.nombre}</p>
-                        <p class="text-success fw-bold gap-3">
+                        <p class="text-success fw-bold">
                             <fmt:formatNumber value="${p.precioUnitario}" type="currency" currencySymbol="€"/>
-                           
-                            <select value="stock" name="stock">  <!-- ??????????????????? no se como leches pasarle esto al controller -->
-		                        <c:forEach var="i" begin="1" end="10">
-		                        <option value="${i}">${i}</option>
-		                    	</c:forEach>
-                    		</select>
                         </p>
-                        
-                        <a href="ControladorRecyclon?accion=comprar&id=${p.id}" class="btn btn-primary w-100">
+                        <a href="ControladorRecyclon?accion=modificar&id=${p.id}" class="btn btn-primary w-100">
                             Comprar
                         </a>
                     </div>
+
                 </div>
             </div>
         </c:forEach>

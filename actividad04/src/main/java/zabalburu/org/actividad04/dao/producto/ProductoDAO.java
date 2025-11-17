@@ -13,4 +13,5 @@ public interface ProductoDAO {
 	void eliminarProducto(Integer id);
 	List<Producto> getProducto();
 	List<Producto> getProductoCat(Integer id);
+	List<Producto> getNivelStock();
 }
