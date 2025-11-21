@@ -1,69 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Required meta tags -->
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet">
 
-<title>Indentifíquese</title>
+<title>Identifíquese</title>
+
+<style>
+    body {
+        background-color: #f5f7fb;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    .login-container {
+        background: white;
+        padding: 35px;
+        margin-top: 70px;
+        border-radius: 15px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2b2f38;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 1rem;
+    }
+
+    label {
+        font-weight: 600;
+        color: #3b3f47;
+    }
+
+    .alert {
+        border-radius: 10px;
+    }
+
+    .logo {
+        width: 70%;
+        max-width: 280px;
+    }
+</style>
+
 </head>
 <body>
-	<div class="container mt-5">
-		<div class="row text-center">
-			<h1>Identifíquese</h1>
-		</div>
-		<c:if test="${! empty mensajeCDI.message }">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6">
-					<div class="alert ${mensajeCDI.role }">${mensajeCDI.message }</div>
-				</div>
-			</div>
-		</c:if>
-		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
-				<form action="" method="post">
-					<div class="mb-3">
-						<label for="exampleInputlogin" class="form-label">Nombre
-						</label> <input type="text" class="form-control"
-							id="exampleInputlogin" aria-describedby="emailHelp" name="nombre"
-							value="${param.nombre}">
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Contraseña</label>
-						<input type="password" class="form-control"
-							id="exampleInputPassword1" name="contra" 
-							value="${param.contra}">
-					</div>
-					<button type="submit" class="btn btn-primary" name="accion" value="login">Entrar</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Optional JavaScript; choose one of the two! -->
 
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+<div class="container d-flex justify-content-center">
+    <div class="col-md-5 login-container">
 
-	<!-- Option 2: Separate Popper and Bootstrap JS -->
-	<!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+        <div class="text-center mb-4">
+            <img src="imagenes/recyclon.png" 
+                 alt="Recylon Logo" class="logo mb-4">
+            <h1>Identifíquese</h1>
+        </div>
+
+        <c:if test="${! empty mensajeCDI.message }">
+            <div class="alert ${mensajeCDI.role } text-center">
+                ${mensajeCDI.message}
+            </div>
+        </c:if>
+
+        <form action="" method="post">
+
+            <div class="mb-3">
+                <label for="exampleInputlogin" class="form-label">Nombre</label>
+                <input type="text" class="form-control"
+                       id="exampleInputlogin" name="nombre"
+                       value="${param.nombre}">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="password" class="form-control"
+                       id="exampleInputPassword1" name="contra"
+                       value="${param.contra}">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100"
+                    name="accion" value="login">
+                Entrar
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

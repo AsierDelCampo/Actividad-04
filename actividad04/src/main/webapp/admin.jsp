@@ -33,6 +33,10 @@
 
 <nav class="navbar navbar-light bg-white shadow-sm mb-4 p-3">
     <div class="container-fluid">
+    	 <img src="imagenes/recyclon.png" 
+                 alt="Logo" 
+                 style="height: 50px;" 
+                 class="me-3">
         <h3 class="fw-bold">Panel de Administración</h3>
         <a href="login" class="btn btn-outline-primary">Volver</a>
     </div>
