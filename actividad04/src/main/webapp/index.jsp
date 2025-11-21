@@ -28,28 +28,29 @@
         box-shadow: 0 3px 12px rgba(0,0,0,0.10);
     }
 
-    h1 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #2b2f38;
-    }
+	 .btn-primary {
+	    background: linear-gradient(to right, #28a745, #20c997); /* verde a azul turquesa */
+	    border: none;
+	    border-radius: 12px;
+	    padding: 12px;
+	    font-size: 1.1rem;
+	    font-weight: 600;
+	    transition: background 0.3s ease, transform 0.2s ease;
+	}
 
-    .btn-primary {
-        background-color: #0d6efd;
-        border-radius: 8px;
-        padding: 10px 18px;
-        font-size: 1rem;
-    }
+	.btn-primary:hover {
+	    background: linear-gradient(to right, #20c997, #28a745); /* invierte el degradado al hover */
+	    transform: scale(1.05);
+	}
 
     label {
         font-weight: 600;
         color: #3b3f47;
     }
-
-    .alert {
-        border-radius: 10px;
+ 	.alert {
+        border-radius: 12px;
+        font-weight: 500;
     }
-
     .logo {
         width: 70%;
         max-width: 280px;
@@ -59,13 +60,15 @@
 </head>
 <body>
 
-<div class="container d-flex justify-content-center">
-    <div class="col-md-5 login-container">
+<div class="container d-flex justify-content-center align-items-start mt-5">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-5 login-container">
 
         <div class="text-center mb-4">
             <img src="imagenes/recyclon.png" 
                  alt="Recylon Logo" class="logo mb-4">
-            <h1>Identifíquese</h1>
+
+            <h1 class="display-6 text-primary">Bienvenido a Recyclon</h1>
+            <p class="text-muted">Introduce tus credenciales para continuar</p>
         </div>
 
         <c:if test="${! empty mensajeCDI.message }">
@@ -99,6 +102,7 @@
 
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 

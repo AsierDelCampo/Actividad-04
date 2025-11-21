@@ -134,12 +134,11 @@
                             <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" name="nombre" value="${p.nombre}" required>
                         </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label">Precio</label>
-                            <input type="text" class="form-control" name="precio" required>
+						<div class="col-md-5">
+                            <label class="form-label">Descripción</label>
+                            <input type="text" class="form-control" name="descripcion" required>
                         </div>
-
+                       
                         <div class="col-md-4">
                             <label class="form-label">Categoría</label>
                             <select class="form-select" name="categoria" required>
@@ -150,10 +149,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" required>
-                        </div>
+                        
 
                         <div class="col-md-3">
                             <label class="form-label">Stock</label>
@@ -247,7 +243,10 @@
                             </td>
                             <td>${p.stock}</td>
 
-                            <td><a href="ControladorRecyclon?accion=eliminar&id=${p.id}" class="btn btn-sm btn-danger">Borrar</a></td>
+                            <td><a href="ControladorRecyclon?accion=eliminar&id=${p.id}" class="btn btn-sm btn-danger d-flex align-items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+							  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+							</svg>Borrar</a></td>
                         </tr>
                         </c:forEach>
                     </tbody>

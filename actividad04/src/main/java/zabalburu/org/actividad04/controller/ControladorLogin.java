@@ -60,12 +60,12 @@ public class ControladorLogin extends HttpServlet {
 		String contra = request.getParameter("contra");
 		if (nombre.isBlank() || contra.isBlank()) {
 			mensajeCDI.setMessage("Todos los campos son OBLIGATORIOS!");
-			mensajeCDI.setRole("alert-danger");
+			mensajeCDI.setRole("alert alert-danger text-center");
 			return "index.jsp";
 		} 
 		if (service.login(nombre, contra) == null) {
 			mensajeCDI.setMessage("Usuario / Password ERRÓNEOS");
-			mensajeCDI.setRole("alert alert-danger");
+			mensajeCDI.setRole("alert alert-danger text-center");
 			return "index.jsp";
 		} 
 		

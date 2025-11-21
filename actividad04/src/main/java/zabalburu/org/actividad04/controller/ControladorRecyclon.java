@@ -127,7 +127,7 @@ public class ControladorRecyclon extends HttpServlet {
 
 	    HttpSession sesion = request.getSession();
 	    Usuario u = (Usuario) sesion.getAttribute("usuario");
-
+	    
 	    pe.setUsuario(u);
 	    pe.setFechaPedido(new Date());
 	    pe.setEstado("Enviado");
@@ -139,11 +139,12 @@ public class ControladorRecyclon extends HttpServlet {
 	    lp.setPrecioUnitario(p.getPrecioUnitario());
 	    lp.setProducto(p);
 	    lp.setCantidad(1);
-
+	    
 	    pe.getLineaPedido().add(lp);
 
 	    service.nuevaLinea(lp);
-
+	    request.setAttribute("usuario", u);
+	    
 	    return "ControladorRecyclon";
 	}
 
