@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import zabalburu.org.actividad04.cdi.MensajeCDI;
 import zabalburu.org.actividad04.modelo.Categoria;
+import zabalburu.org.actividad04.modelo.LineaPedido;
 import zabalburu.org.actividad04.modelo.Pedido;
 import zabalburu.org.actividad04.modelo.Producto;
 import zabalburu.org.actividad04.modelo.Usuario;
@@ -118,24 +119,32 @@ public class ControladorRecyclon extends HttpServlet {
 
 	}
 
-	private String comprarProducto(HttpServletRequest request, HttpServletResponse response) { // nadie en su sano juicio hace funcionar este metodo!!!!!!!!
-		Pedido  p = new Pedido();
-		
-		HttpSession sesion = request.getSession();
-		Usuario u = (Usuario) sesion.getAttribute("usuario");
-		p.setUsuario(u);
-		
-		Date ahora = new Date();
-		request.setAttribute("ahora", df.format(ahora));
-		p.setFechaPedido(ahora);
-		p.setEstado("Enviado");
-		
-		
-		
-		
-		
-		
-		return "ControladorRecyclon";
+	private String comprarProducto(HttpServletRequest request, HttpServletResponse response) { 
+		Pedido pe = new Pedido();
+	    
+	    Integer idProducto = Integer.parseInt(request.getParameter("id"));
+	    Producto p = service.getProductoId(idProducto);
+
+	    HttpSession sesion = request.getSession();
+	    Usuario u = (Usuario) sesion.getAttribute("usuario");
+
+	    pe.setUsuario(u);
+	    pe.setFechaPedido(new Date());
+	    pe.setEstado("Enviado");
+
+	    service.nuevoPedido(pe);   
+
+	    LineaPedido lp = new LineaPedido();
+	    lp.setPedido(pe);
+	    lp.setPrecioUnitario(p.getPrecioUnitario());
+	    lp.setProducto(p);
+	    lp.setCantidad(1);
+
+	    pe.getLineaPedido().add(lp);
+
+	    service.nuevaLinea(lp);
+
+	    return "ControladorRecyclon";
 	}
 
 	private String filtrarProducto(HttpServletRequest request, HttpServletResponse response) {

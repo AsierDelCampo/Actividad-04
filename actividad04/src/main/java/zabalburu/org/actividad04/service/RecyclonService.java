@@ -78,7 +78,7 @@ public class RecyclonService {
 		return lineaPedidoDAO.getPedidos();
 	}
 	
-	LineaPedido nuevaLinea(LineaPedido lp) {
+	public LineaPedido nuevaLinea(LineaPedido lp) {
 		return lineaPedidoDAO.nuevaLinea(lp);
 	}
 	void eliminarLinea(LineaPedido lp) {

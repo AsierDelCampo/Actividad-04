@@ -1,6 +1,7 @@
 package zabalburu.org.actividad04.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,10 +39,11 @@ public class Pedido implements Serializable	 {
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Usuario usuario;
-	private List<LineaPedido> lineaPedido;
+	@OneToMany(mappedBy = "pedido")
+	private List<LineaPedido> lineaPedido = new ArrayList<>();
 	
 	
-	@OneToMany(mappedBy = "lineaPedido")
+	
 	
 	@Override
 	public String toString() {
