@@ -84,7 +84,7 @@ Para ejecutar la aplicación:
 <h3 id="consultas-jpql">🔎 Consultas JPQL</h3>
 
 - Productos con stock bajo.
-- 
+
 ---
 
 <h2 id="arquitectura-del-proyecto">🧱 Arquitectura del Proyecto</h2>
