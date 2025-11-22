@@ -36,7 +36,7 @@ Para ejecutar la aplicación:
 <h3 id="credenciales-de-acceso">🔐 Credenciales de acceso</h3>
 
 - **Usuario Normal:**  
-  - Usuario: `User`  
+  - Usuario: `Asier`  
   - Contraseña: `usuario123`
 
 - **Administrador:**  
