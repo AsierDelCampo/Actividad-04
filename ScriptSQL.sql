@@ -1,8 +1,8 @@
 --Usuarios
 INSERT INTO usuarios (admin, apellidos, contra, nombre_usuario) VALUES 
 (1, 'Administrador', 'admin123', 'Admin'),
-(0, 'del Campo', 'usuario123', 'Asier');
-(2, 'Aurrekoetxea', 'usuario123', 'Iraitz');
+(0, 'del Campo', 'usuario123', 'Asier'),
+(0, 'Aurrekoetxea', 'usuario123', 'Iraitz');
 
 -- Categorias
 INSERT INTO Categorias (nombre_categoria) VALUES
