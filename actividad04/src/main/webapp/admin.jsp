@@ -195,7 +195,7 @@
                             <th>Stock</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <c:forEach var="p" items="${stockbajo}">
                         <tr>
                             <td>${p.id}</td>
@@ -232,7 +232,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <c:forEach var="p" items="${productos}">
                         <tr>
                             <td>${p.id}</td>
