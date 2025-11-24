@@ -28,6 +28,10 @@ Aplicación web desarrollada con **Jakarta EE**, **JPA (Hibernate)** y **Bootstr
 ---
 
 <h2 id="despliegue">🚀 Despliegue</h2>
+Antes de ejecutar la aplicación:
+
+1.Poner en update el persistance.xml para que se creen las tablas la primera vez.
+2.Después ejecutar el script SQL para rellenar las tablas.
 
 Para ejecutar la aplicación:
 
